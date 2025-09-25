@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - FitWeb</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+<body class="bg-dark text-light">
+    <header class="navbar navbar-expand-lg navbar-dark bg-black shadow-sm sticky-top">
+        </header>
+
+    <main class="d-flex align-items-center" style="min-height: calc(100vh - 70px);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card bg-black border border-secondary">
+                        <div class="card-body p-5 text-center">
+                            <h2 class="fw-bold mb-4 text-warning">Crear Cuenta</h2>
+                            <form id="register-form">
+                                <div class="form-outline mb-4"><input type="text" id="nombre" class="form-control form-control-lg bg-dark text-light border-secondary" placeholder="Nombre completo" required /></div>
+                                <div class="form-outline mb-4"><input type="text" id="rut" class="form-control form-control-lg bg-dark text-light border-secondary" placeholder="RUT (sin puntos ni guión)" required /></div>
+                                <div class="form-outline mb-4"><input type="email" id="email" class="form-control form-control-lg bg-dark text-light border-secondary" placeholder="Correo electrónico" required /></div>
+                                <div class="form-outline mb-4"><input type="tel" id="telefono" class="form-control form-control-lg bg-dark text-light border-secondary" placeholder="Número de Teléfono" required /></div>
+                                <div class="form-outline mb-4"><input type="password" id="password" class="form-control form-control-lg bg-dark text-light border-secondary" placeholder="Crear contraseña" required /></div>
+                                <div class="d-grid"><button class="btn btn-warning btn-lg" type="submit">Registrarse</button></div>
+                            </form>
+                            <p class="mt-4">¿Ya tienes una cuenta? <a href="inicioSesion.html" class="text-warning fw-bold">Inicia Sesión</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        document.getElementById('register-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const rut = document.getElementById('rut').value;
+            const email = document.getElementById('email').value;
+            const telefono = document.getElementById('telefono').value;
+            const password = document.getElementById('password').value;
+
+            if (!nombre || !rut || !email || !telefono || !password) {
+                alert('Por favor, completa todos los campos.');
+                return;
+            }
+
+            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+            // Validación de correo duplicado
+            if (usuarios.find(u => u.email === email)) {
+                alert('Este correo electrónico ya está registrado. Por favor, utiliza otro.');
+                return;
+            }
+            
+            const nuevoUsuario = { id: Date.now(), nombre, rut, email, telefono, password };
+            usuarios.push(nuevoUsuario);
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+            alert('¡Registro exitoso! Ahora puedes iniciar sesión.');
+            window.location.href = 'inicioSesion.html';
+        });
+    </script>
+</body>
+</html>

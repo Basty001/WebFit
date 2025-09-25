@@ -1,0 +1,229 @@
+/* --------------------------------- */
+/* --- ESTILOS GENERALES DEL BODY --- */
+
+body {
+  background-color: #000;      /* Fondo negro */
+  color: #f5f5f5;             /* Texto base gris claro */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* -------------------------- */
+/* --- TÍTULOS Y TEXTOS --- */
+
+h1, h2, h3, h4, h5, h6 {
+  color: #fff;                /* Títulos en blanco puro */
+  margin-bottom: 10px;
+}
+
+p, li, span {
+  color: #ddd;                /* Texto normal gris claro */
+  line-height: 1.6;
+}
+
+/* ----------------- */
+/* --- ENLACES --- */
+
+a {
+  color: #ffcc00;             /* Enlaces en amarillo dorado */
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #fff;                /* Al pasar el mouse se vuelven blancos */
+}
+
+/* ----------------- */
+/* --- BOTONES --- */
+
+button, .btn {
+  background: #ffcc00;        /* Fondo amarillo */
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s, color 0.3s;
+}
+
+button:hover, .btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* --------------------- */
+/* --- FORMULARIOS --- */
+
+.form-container {
+  background: #111;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 2rem auto;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  background: #222;
+  color: #fff;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #aaa;
+}
+
+/* --------------------------- */
+/* --- HEADER Y FOOTER --- */
+
+header, footer {
+  background: #111;
+  padding: 1rem;
+  text-align: center;
+}
+
+footer p {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* -------------------------------------- */
+/* --- TARJETAS DE PRODUCTOS (CARDS) --- */
+
+.card {
+  background: #111;
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05); /* Efecto de zoom al pasar el cursor */
+}
+
+.card img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.card h3 {
+  color: #ffcc00;
+}
+
+/* Estilo para que las imágenes de la tienda tengan el mismo tamaño */
+#product-grid .card-img-top {
+  height: 250px;
+  object-fit: contain; /*  imagen completa sea visible */
+}
+
+
+/* ----------------------------- */
+/* --- CARRITO DE COMPRAS --- */
+
+.cart-icon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #ffcc00;
+  color: #000;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1060;
+}
+
+.cart-icon:hover {
+  background: #fff;
+}
+
+.cart-icon .badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+}
+
+/* Panel lateral del carrito */
+.cart-panel {
+  position: fixed;
+  top: 0;
+  right: -400px; /* Oculto por defecto */
+  width: 350px;
+  height: 100%;
+  background: #111;
+  color: #fff;
+  padding: 1rem;
+  box-shadow: -5px 0 10px rgba(0,0,0,0.5);
+  transition: right 0.3s;
+  overflow-y: auto;
+  z-index: 1050;
+}
+
+.cart-panel.active {
+  right: 0; /* Se muestra al añadir la clase 'active' */
+}
+
+/* --------------------------------- */
+/* --- ESTILOS GENERALES DEL BODY --- */
+
+body {
+  background-color: #000;      /* Fondo negro */
+  color: #f5f5f5;             /* Texto base gris claro */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+/* ----------------------------- */
+/* --- CARRITO DE COMPRAS --- */
+
+.cart-icon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #ffcc00;
+  color: #000;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1060;
+}
+
+
+
+.cart-panel.active {
+  right: 0; /* Se muestra al añadir la clase 'active' con JavaScript */
+}
+
+
+
+/* ================================================= */
+/* --- CORRECCIÓN PARA MODALES (PERFIL ENTRENADOR) --- */
+
+.modal-content {
+  background-color: #1a1a1a; 
+  border: 1px solid #333;   /* Un borde  */
+}
+
+/* ======================================================= */
+/* ---  IMÁGENES DE TARJETAS (NOSOTROS) --- */
+
+.card .card-img-top {
+  height: 250px;
+  object-fit: contain; 
+}
+
