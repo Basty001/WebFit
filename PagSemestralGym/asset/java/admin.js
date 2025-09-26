@@ -182,6 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const emailInput = document.getElementById('usuario-email').value.trim();
     const nombreInput = document.getElementById('usuario-nombre').value.trim();
     const telefonoInput = document.getElementById('usuario-telefono').value.trim();
+    const password = document.getElementById('password').value.trim();// Nueva línea para obtener el valor del campo de contraseña
 
     // Regex de dominio permitido
     const emailRegex = /^[a-zA-Z0-9._%+-]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/;
@@ -199,10 +200,17 @@ document.addEventListener('DOMContentLoaded', function () {
         error = true;
     }
 
+      // Validación de contraseña (mínimo 4, máximo 10 caracteres)
+    if (password.length < 4 || password.length > 10) {
+        alert('La contraseña debe tener entre 4 y 10 caracteres.');
+        return;
+    } // Fin de la nueva validación
+
     if (!telefonoInput) {
         alert("Debes ingresar un número de teléfono.");
         error = true;
     }
+
 
     if (error) {
         formAddUsuario.classList.add('was-validated'); // muestra feedback de HTML

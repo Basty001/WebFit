@@ -76,6 +76,12 @@ document.getElementById('register-form').addEventListener('submit', function(eve
         return;
     }
 
+    // Validación de contraseña (mínimo 4, máximo 10 caracteres)
+    if (password.length < 4 || password.length > 10) {
+        alert('La contraseña debe tener entre 4 y 10 caracteres.');
+        return;
+    }
+
     // Obtener usuarios existentes
     const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
 
