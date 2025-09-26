@@ -9,7 +9,25 @@
 </head>
 <body class="bg-dark text-light">
     <header class="navbar navbar-expand-lg navbar-dark bg-black shadow-sm sticky-top">
-        </header>
+    <div class="container">
+      <a class="navbar-brand fw-bold text-warning" href="index.html">FitWeb</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="planes.html">Planes</a></li>
+          <li class="nav-item"><a class="nav-link" href="Entrenadores.html">Entrenadores</a></li>
+          <li class="nav-item"><a class="nav-link" href="Tienda.html">Tienda</a></li>
+          <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+        </ul>
+        
+      </div>
+    </div>
+</header>
 
     <main class="d-flex align-items-center" style="min-height: calc(100vh - 70px);">
         <div class="container">
@@ -35,34 +53,53 @@
     </main>
     
     <script>
-        document.getElementById('register-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const nombre = document.getElementById('nombre').value;
-            const rut = document.getElementById('rut').value;
-            const email = document.getElementById('email').value;
-            const telefono = document.getElementById('telefono').value;
-            const password = document.getElementById('password').value;
+document.getElementById('register-form').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-            if (!nombre || !rut || !email || !telefono || !password) {
-                alert('Por favor, completa todos los campos.');
-                return;
-            }
+    // Obtener valores y limpiar espacios
+    const nombre = document.getElementById('nombre').value.trim();
+    const rut = document.getElementById('rut').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
+    const password = document.getElementById('password').value.trim();
 
-            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+    // Validación de campos obligatorios
+    if (!nombre || !rut || !email || !telefono || !password) {
+        alert('Por favor, completa todos los campos.');
+        return;
+    }
 
-            // Validación de correo duplicado
-            if (usuarios.find(u => u.email === email)) {
-                alert('Este correo electrónico ya está registrado. Por favor, utiliza otro.');
-                return;
-            }
-            
-            const nuevoUsuario = { id: Date.now(), nombre, rut, email, telefono, password };
-            usuarios.push(nuevoUsuario);
-            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+    // Validación de formato de correo 
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/;
+    if (!emailRegex.test(email)) {
+        alert('El correo debe tener: @duoc.cl, @profesor.duoc.cl o @gmail.com');
+        return;
+    }
 
-            alert('¡Registro exitoso! Ahora puedes iniciar sesión.');
-            window.location.href = 'inicioSesion.html';
-        });
-    </script>
+    // Obtener usuarios existentes
+    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+    // Validación de correo duplicado
+    if (usuarios.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+        alert('Este correo electrónico ya está registrado. Por favor, utiliza otro.');
+        return;
+    }
+
+    // Validación de RUT duplicado 
+    if (usuarios.find(u => u.rut === rut)) {
+        alert('Este RUT ya está registrado.');
+        return;
+    }
+
+    
+    const nuevoUsuario = { id: Date.now(), nombre, rut, email, telefono, password };
+    usuarios.push(nuevoUsuario);
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+    alert('¡Registro exitoso! Ahora puedes iniciar sesión.');
+    window.location.href = 'inicioSesion.html';
+});
+</script>
+
 </body>
 </html>

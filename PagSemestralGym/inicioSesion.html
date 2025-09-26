@@ -68,7 +68,7 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            // 1. Verifica si las credenciales son las del administrador
+            //  Verifica si las credenciales son las del administrador
             if (email === 'admin@fitweb.com' && password === 'admin123') {
                 alert('Inicio de sesión como Administrador exitoso.');
                 localStorage.setItem('adminLogueado', 'true');
@@ -76,7 +76,7 @@
                 return;
             }
 
-            // 2. Si no es admin, busca en la lista de usuarios
+            //  Si no es admin, busca en la lista de usuarios
             const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
             const usuarioEncontrado = usuarios.find(u => u.email === email && u.password === password);
 
@@ -88,7 +88,10 @@
                 alert('Correo o contraseña incorrectos.');
             }
         });
+        
     </script>
 </body>
+
+<!--ADMIN CORREO = admin@fitweb.com   CONTRASEÑÁ =  admin123   -->
 
 </html>

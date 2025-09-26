@@ -175,34 +175,68 @@ document.addEventListener('DOMContentLoaded', function () {
     formAddUsuario.classList.remove('was-validated');
   }
 
-  // Guardar usuario (nuevo o editado)
-  formAddUsuario.addEventListener('submit', function (event) {
+ formAddUsuario.addEventListener('submit', function (event) {
     event.preventDefault();
-    if (formAddUsuario.checkValidity()) {
-        const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
-        const id = parseInt(usuarioIdInput.value);
-        if (id) {
-            const index = usuarios.findIndex(u => u.id === id);
-            if(index !== -1) {
-                usuarios[index].nombre = document.getElementById('usuario-nombre').value;
-                usuarios[index].email = document.getElementById('usuario-email').value;
-                usuarios[index].telefono = document.getElementById('usuario-telefono').value;
-            }
-        } else {
-            const nuevoUsuario = { 
-              id: Date.now(), 
-              nombre: document.getElementById('usuario-nombre').value, 
-              email: document.getElementById('usuario-email').value, 
-              telefono: document.getElementById('usuario-telefono').value
-            };
-            usuarios.push(nuevoUsuario);
-        }
-        localStorage.setItem('usuarios', JSON.stringify(usuarios));
-        cargarUsuarios();
-        resetFormularioUsuario();
+
+    // Usar trim para limpiar espacios
+    const emailInput = document.getElementById('usuario-email').value.trim();
+    const nombreInput = document.getElementById('usuario-nombre').value.trim();
+    const telefonoInput = document.getElementById('usuario-telefono').value.trim();
+
+    // Regex de dominio permitido
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/;
+
+    let error = false;
+
+    // Validaciones
+    if (!nombreInput) {
+        alert("Debes ingresar un nombre.");
+        error = true;
     }
-    formAddUsuario.classList.add('was-validated');
-  });
+
+    if (!emailRegex.test(emailInput)) {
+        alert("El correo debe ser de los dominios permitidos: @duoc.cl, @profesor.duoc.cl o @gmail.com");
+        error = true;
+    }
+
+    if (!telefonoInput) {
+        alert("Debes ingresar un número de teléfono.");
+        error = true;
+    }
+
+    if (error) {
+        formAddUsuario.classList.add('was-validated'); // muestra feedback de HTML
+        return; // Detiene el submit si hay error
+    }
+
+    // Guardar usuario
+    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+    const id = parseInt(usuarioIdInput.value);
+
+    if (id) {
+        // Editar existente
+        const index = usuarios.findIndex(u => u.id === id);
+        if (index !== -1) {
+            usuarios[index].nombre = nombreInput;
+            usuarios[index].email = emailInput;
+            usuarios[index].telefono = telefonoInput;
+        }
+    } else {
+        // Crear nuevo usuario
+        usuarios.push({
+            id: Date.now(),
+            nombre: nombreInput,
+            email: emailInput,
+            telefono: telefonoInput
+        });
+    }
+
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+    cargarUsuarios();
+    resetFormularioUsuario();
+});
+
+
 
   // Eliminar usuario
   tablaUsuariosBody.addEventListener('click', (event) => {

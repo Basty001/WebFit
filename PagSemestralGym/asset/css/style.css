@@ -220,10 +220,14 @@ body {
 }
 
 /* ======================================================= */
-/* ---  IMÁGENES DE TARJETAS (NOSOTROS) --- */
+/* ---  IMÁGENES DE TARJETAS (NOSOTROS.hmtl) --- */
 
 .card .card-img-top {
   height: 250px;
   object-fit: contain; 
 }
 
+#register-form ::placeholder {
+    color: #f8f9fa;
+    opacity: 1;
+}
